@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quinlan Hoang — AI/ML · Data · Security</title>
+  <meta name="description" content="Portfolio of Quinlan Hoang — engineer working across AI/ML systems, data collection & analytics, and cybersecurity.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- animated 3D sphere background -->
+  <canvas id="sphere-bg" aria-hidden="true"></canvas>
+
+  <nav class="nav">
+    <a class="nav-brand" href="#top" id="nav-brand">QH</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" class="switch-toggle" role="switch" aria-checked="false" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <span class="switch-track"><span class="switch-thumb"></span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <header class="hero">
+      <p class="hero-hello">Hi, I'm</p>
+      <h1 class="hero-name" id="hero-name">Quinlan Hoang</h1>
+      <h2 class="hero-role" id="hero-role"></h2>
+      <p class="hero-pitch" id="hero-pitch"></p>
+      <div class="hero-actions" id="hero-actions">
+        <a class="key-btn key-btn-primary" href="#projects"><span>View Projects</span></a>
+      </div>
+    </header>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="section">
+      <h2 class="section-title"><span class="section-num">01</span> Experience</h2>
+      <div id="experience-timeline" class="timeline"></div>
+      <h3 class="subsection-title">Education</h3>
+      <div id="education-list" class="education-list"></div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="section">
+      <h2 class="section-title"><span class="section-num">02</span> Projects</h2>
+      <div id="project-filters" class="filters" aria-label="Filter projects by technology"></div>
+      <div id="project-grid" class="project-grid"></div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="section">
+      <h2 class="section-title"><span class="section-num">03</span> Skills</h2>
+      <div id="skills-grid" class="skills-grid"></div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section section-contact">
+      <h2 class="section-title"><span class="section-num">04</span> Get in touch</h2>
+      <p class="contact-blurb">
+        I'm open to opportunities across AI/ML, data engineering, and security —
+        and always happy to talk about interesting problems.
+      </p>
+      <div id="contact-links" class="contact-links"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p id="footer-text"></p>
+  </footer>
+
+  <script src="projects.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
