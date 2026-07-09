@@ -183,9 +183,46 @@ Object.entries(SITE.skills || {}).forEach(([group, items]) => {
 
 /* ---------- contact & footer ---------- */
 const contact = document.getElementById("contact-links");
-if (SITE.email) contact.appendChild(keyBtn(`mailto:${SITE.email}`, "Email Me", true));
-if (SITE.github) contact.appendChild(keyBtn(SITE.github, "GitHub"));
-if (SITE.linkedin) contact.appendChild(keyBtn(SITE.linkedin, "LinkedIn"));
+
+if (SITE.email) {
+  // visible email + a copy-to-clipboard keycap with feedback
+  const row = el("div", "email-row");
+  row.appendChild(el("span", "email-text", SITE.email));
+
+  const copyBtn = el("button", "key-btn key-btn-primary");
+  const label = el("span", "", "Copy Email");
+  copyBtn.appendChild(label);
+  copyBtn.addEventListener("click", async () => {
+    let ok = false;
+    try {
+      await navigator.clipboard.writeText(SITE.email);
+      ok = true;
+    } catch {
+      // fallback for non-secure contexts (e.g. some file:// setups)
+      const ta = document.createElement("textarea");
+      ta.value = SITE.email;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      ok = document.execCommand("copy");
+      ta.remove();
+    }
+    label.textContent = ok ? "Copied ✓" : "Copy failed";
+    copyBtn.classList.toggle("copied", ok);
+    setTimeout(() => {
+      label.textContent = "Copy Email";
+      copyBtn.classList.remove("copied");
+    }, 2000);
+  });
+  row.appendChild(copyBtn);
+  contact.appendChild(row);
+}
+
+const contactBtns = el("div", "contact-btn-row");
+if (SITE.github) contactBtns.appendChild(keyBtn(SITE.github, "GitHub"));
+if (SITE.linkedin) contactBtns.appendChild(keyBtn(SITE.linkedin, "LinkedIn"));
+if (contactBtns.children.length) contact.appendChild(contactBtns);
 
 document.getElementById("footer-text").textContent =
   `© ${new Date().getFullYear()} ${SITE.name} · Built with plain HTML/CSS/JS`;
@@ -259,11 +296,17 @@ document.getElementById("footer-text").textContent =
   };
   sphereRefreshColors();
 
-  /* mouse parallax */
+  /* cursor tracking — the globe rotates toward the pointer and
+     drifts slightly with it */
   let targetRX = 0, targetRY = 0, curRX = 0, curRY = 0;
+  let targetOX = 0, targetOY = 0, curOX = 0, curOY = 0;
   window.addEventListener("pointermove", (e) => {
-    targetRY = (e.clientX / W - 0.5) * 0.9;
-    targetRX = (e.clientY / H - 0.5) * 0.6;
+    const nx = e.clientX / W - 0.5;   // -0.5 … 0.5
+    const ny = e.clientY / H - 0.5;
+    targetRY = nx * 2.4;              // rotation follows the cursor
+    targetRX = ny * 1.6;
+    targetOX = nx * R * 0.22;         // and the whole sphere drifts a bit
+    targetOY = ny * R * 0.22;
   });
 
   const proj = new Array(N);
@@ -272,9 +315,11 @@ document.getElementById("footer-text").textContent =
   function frame(t) {
     ctx.clearRect(0, 0, W, H);
 
-    // ease parallax toward the mouse
-    curRX += (targetRX - curRX) * 0.04;
-    curRY += (targetRY - curRY) * 0.04;
+    // ease rotation and drift toward the cursor
+    curRX += (targetRX - curRX) * 0.06;
+    curRY += (targetRY - curRY) * 0.06;
+    curOX += (targetOX - curOX) * 0.05;
+    curOY += (targetOY - curOY) * 0.05;
 
     const ay = t * 0.00012 + curRY;             // slow spin + mouse
     const ax = 0.35 + curRX;
@@ -294,8 +339,8 @@ document.getElementById("footer-text").textContent =
 
       const s = FOV / (FOV + z);               // perspective
       proj[i] = {
-        x: CX + x * R * pulse * s,
-        y: CY + y * R * pulse * s,
+        x: CX + curOX + x * R * pulse * s,
+        y: CY + curOY + y * R * pulse * s,
         z,
         s,
       };
