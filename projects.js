@@ -86,17 +86,26 @@ const PROJECTS = [
   },
   {
     name: "NodeSense",
-    tagline: "Short one-liner about what NodeSense does — edit me in projects.js.",
+    tagline: "Explainable AI intrusion detection — a transformer that catches novel network attacks and explains every alert with SHAP.",
     description:
-      "Describe NodeSense here: the problem it solves, the approach you took, and what makes it " +
-      "interesting technically.",
-    tags: ["Node.js", "JavaScript"],
-    status: "In Development",
-    featured: false,
-    links: { github: "https://github.com/quinlan-dev/NodeSense", demo: "", writeup: "" },
+      "Signature-based IDS tools miss zero-days, and ML detectors that catch them can't explain " +
+      "themselves. NodeSense does both: a transformer classifies sequences of network flows into " +
+      "six traffic classes, and a live SHAP layer attributes each detection to the exact flow" +
+      "features that drove it. Deployed end-to-end: ONNX serving on Hugging Face Spaces behind a " +
+      "React dashboard with a real-time alert stream.",
+    tags: ["Python", "PyTorch", "FastAPI", "ONNX", "SHAP", "React", "Docker", "AI/ML", "Security"],
+    status: "Active",
+    featured: true,
+    links: {
+      github: "https://github.com/quinlan-dev/NodeSense",
+      demo: "https://quinlan-dev.github.io/NodeSense/",
+      writeup: ""
+    },
     highlights: [
-      "Key technical achievement #1",
-      "Key technical achievement #2"
+      "Transformer sequence classifier (6 attack classes) exported to a 335KB ONNX model serving <5ms CPU inference",
+      "Real-time KernelSHAP explanations (~120ms) computed against the served model for every alert",
+      "Benchmarked against random forest (0.998 AUC) and autoencoder (0.959 AUC) baselines in one reproducible pipeline",
+      "Free-tier production deploy: FastAPI + WebSockets on HF Spaces, React dashboard on GitHub Pages"
     ]
   }
 ];
