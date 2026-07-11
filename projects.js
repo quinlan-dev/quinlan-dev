@@ -70,18 +70,24 @@ const PROJECTS = [
   },
   {
     name: "AFKapply",
-    tagline: "Automated job application assistant that applies while you're away from keyboard.",
+    tagline: "Your job search, running while you're AFK — automated matching, tailored documents, and recruiter outreach from one resume upload.",
     description:
-      "Automates the repetitive parts of the job application pipeline — discovering postings, " +
-      "tailoring materials, and submitting applications. " +
-      "(Edit this description in projects.js with your real details.)",
-    tags: ["Python", "Automation", "Web Scraping"],
-    status: "In Development",
-    featured: false,
-    links: { github: "https://github.com/quinlan-dev/AFKapply", demo: "", writeup: "" },
+      "Upload a resume, set your preferences, and AFKapply pulls listings from multiple job " +
+      "boards (Remotive, Arbeitnow, The Muse, Greenhouse, Lever), scores each match against " +
+      "your resume, generates tailored cover letters and summaries, and surfaces direct hiring " +
+      "manager contacts — all free to run, with no paid APIs required.",
+    tags: ["Python", "Automation", "NLP", "Job Board APIs"],
+    status: "Active",
+    featured: true,
+    links: {
+      github: "https://github.com/quinlan-dev/AFKapply",
+      demo: "https://afk-apply.vercel.app/",
+      writeup: ""
+    },
     highlights: [
-      "Automates the end-to-end job application workflow",
-      "Replace with quantified achievements as the project matures"
+      "Aggregates and scores listings from 5+ job board and ATS platforms against the user's resume",
+      "Generates tailored application documents at zero cost, with optional AI-key upgrade for enhanced writing",
+      "Discovers hiring manager / recruiter contacts for direct email outreach, with application tracking and daily caps"
     ]
   },
   {
@@ -90,15 +96,16 @@ const PROJECTS = [
     description:
       "Signature-based IDS tools miss zero-days, and ML detectors that catch them can't explain " +
       "themselves. NodeSense does both: a transformer classifies sequences of network flows into " +
-      "six traffic classes, and a live SHAP layer attributes each detection to the exact flow" +
-      "features that drove it. Deployed end-to-end: ONNX serving on Hugging Face Spaces behind a " +
-      "React dashboard with a real-time alert stream.",
+      "six traffic classes, and a live SHAP layer attributes each detection to the exact flow " +
+      "features that drove it. Built as a graduate independent study at UC Santa Cruz and " +
+      "deployed end-to-end: ONNX serving on Hugging Face Spaces behind a React dashboard with a " +
+      "real-time alert stream.",
     tags: ["Python", "PyTorch", "FastAPI", "ONNX", "SHAP", "React", "Docker", "AI/ML", "Security"],
     status: "Active",
     featured: true,
     links: {
       github: "https://github.com/quinlan-dev/NodeSense",
-      demo: "https://quinlan-dev.github.io/NodeSense/",
+      demo: "https://quinlan-dev.github.io/NodeSense/#/",
       writeup: ""
     },
     highlights: [
