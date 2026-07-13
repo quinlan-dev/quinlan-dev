@@ -20,36 +20,28 @@
 
 const PROJECTS = [
   {
-    name: "Hybrid Routing Proxy for Coding Agents",
-    tagline: "Per-step model router that cuts coding-agent costs by sending easy steps to a local 8B model and hard ones to a frontier 32B model.",
+    name: "NodeSense",
+    tagline: "Explainable AI intrusion detection — a transformer that catches novel network attacks and explains every alert with SHAP.",
     description:
-      "A routing proxy that sits between coding agents (OpenCode) and model backends, dispatching " +
-      "each request based on trajectory state, request features, and response confidence — " +
-      "evaluated end-to-end on SWE-bench Lite to measure cost-vs-success tradeoffs.",
-    tags: ["Python", "FastAPI", "Ollama", "NVIDIA NIM", "Docker", "SWE-bench", "AI/ML"],
-    status: "Completed",
-    featured: true,
-    links: { github: "", demo: "", writeup: "" },
-    highlights: [
-      "OpenAI-compatible FastAPI server with per-trajectory state, heuristic routing, and logprob-based confidence checks",
-      "Escalation path that retries low-confidence local outputs against the frontier model",
-      "Evaluated on a stratified 50-issue SWE-bench Lite subset with baseline, ablation, and full-system runs through an automated harness"
-    ]
-  },
-  {
-    name: "Neural Sentiment Analyzer",
-    tagline: "End-to-end ML pipeline for multi-class sentiment classification — 89% test accuracy, sub-100ms serving.",
-    description:
-      "A production-style ML system: reproducible training with versioned data and tracked " +
-      "experiments, deployed as a containerized inference service with caching.",
-    tags: ["Python", "PyTorch", "Hugging Face", "FastAPI", "Docker", "Redis", "AI/ML"],
+      "Signature-based IDS tools miss zero-days, and ML detectors that catch them can't explain " +
+      "themselves. NodeSense does both: a transformer classifies sequences of network flows into " +
+      "six traffic classes, and a live SHAP layer attributes each detection to the exact flow " +
+      "features that drove it. Built as a graduate independent study at UC Santa Cruz and " +
+      "deployed end-to-end: ONNX serving on Hugging Face Spaces behind a React dashboard with a " +
+      "real-time alert stream.",
+    tags: ["Python", "PyTorch", "FastAPI", "ONNX", "SHAP", "React", "Docker", "AI/ML", "Security"],
     status: "Active",
     featured: true,
-    links: { github: "", demo: "", writeup: "" },
+    links: {
+      github: "https://github.com/quinlan-dev/NodeSense",
+      demo: "https://quinlan-dev.github.io/NodeSense/#/",
+      writeup: ""
+    },
     highlights: [
-      "89% accuracy on the held-out test set using PyTorch and Hugging Face Transformers",
-      "Reproducible preprocessing, training, and evaluation workflows following MLOps practices",
-      "Containerized FastAPI service with a Redis caching layer serving sub-100ms inference latency under load testing"
+      "Transformer sequence classifier (6 attack classes) exported to a 335KB ONNX model serving <5ms CPU inference",
+      "Real-time KernelSHAP explanations (~120ms) computed against the served model for every alert",
+      "Benchmarked against random forest (0.998 AUC) and autoencoder (0.959 AUC) baselines in one reproducible pipeline",
+      "Free-tier production deploy: FastAPI + WebSockets on HF Spaces, React dashboard on GitHub Pages"
     ]
   },
   {
@@ -60,8 +52,12 @@ const PROJECTS = [
       "multi-user edits consistent, built to scale horizontally across server instances.",
     tags: ["Node.js", "React", "WebSockets", "MongoDB", "Redis", "JWT"],
     status: "Active",
-    featured: false,
-    links: { github: "", demo: "", writeup: "" },
+    featured: true,
+    links: {
+      github: "https://github.com/quinlan-dev/CollabSpace",
+      demo: "https://collabspace-ese7.onrender.com/#features",
+      writeup: ""
+    },
     highlights: [
       "Operational transformation keeps concurrent edits consistent across clients",
       "MongoDB persistence + Redis pub/sub broadcasting for horizontal scaling",
@@ -91,28 +87,45 @@ const PROJECTS = [
     ]
   },
   {
-    name: "NodeSense",
-    tagline: "Explainable AI intrusion detection — a transformer that catches novel network attacks and explains every alert with SHAP.",
+    name: "Hybrid Routing Proxy for Coding Agents",
+    tagline: "Per-step model router that cuts coding-agent costs by sending easy steps to a local 8B model and hard ones to a frontier 32B model.",
     description:
-      "Signature-based IDS tools miss zero-days, and ML detectors that catch them can't explain " +
-      "themselves. NodeSense does both: a transformer classifies sequences of network flows into " +
-      "six traffic classes, and a live SHAP layer attributes each detection to the exact flow " +
-      "features that drove it. Built as a graduate independent study at UC Santa Cruz and " +
-      "deployed end-to-end: ONNX serving on Hugging Face Spaces behind a React dashboard with a " +
-      "real-time alert stream.",
-    tags: ["Python", "PyTorch", "FastAPI", "ONNX", "SHAP", "React", "Docker", "AI/ML", "Security"],
-    status: "Active",
+      "A routing proxy that sits between coding agents (OpenCode) and model backends, dispatching " +
+      "each request based on trajectory state, request features, and response confidence — " +
+      "evaluated end-to-end on SWE-bench Lite to measure cost-vs-success tradeoffs. Built as a " +
+      "graduate course project at UC Santa Cruz.",
+    tags: ["Python", "FastAPI", "Ollama", "NVIDIA NIM", "Docker", "SWE-bench", "AI/ML"],
+    status: "Completed",
     featured: true,
     links: {
-      github: "https://github.com/quinlan-dev/NodeSense",
-      demo: "https://quinlan-dev.github.io/NodeSense/#/",
+      github: "https://github.com/ssrajadh/coding-agent-router",
+      demo: "",
       writeup: ""
     },
     highlights: [
-      "Transformer sequence classifier (6 attack classes) exported to a 335KB ONNX model serving <5ms CPU inference",
-      "Real-time KernelSHAP explanations (~120ms) computed against the served model for every alert",
-      "Benchmarked against random forest (0.998 AUC) and autoencoder (0.959 AUC) baselines in one reproducible pipeline",
-      "Free-tier production deploy: FastAPI + WebSockets on HF Spaces, React dashboard on GitHub Pages"
+      "OpenAI-compatible FastAPI server with per-trajectory state, heuristic routing, and logprob-based confidence checks",
+      "Escalation path that retries low-confidence local outputs against the frontier model",
+      "Evaluated on a stratified 50-issue SWE-bench Lite subset with baseline, ablation, and full-system runs through an automated harness"
+    ]
+  },
+  {
+    name: "Neural Sentiment Analyzer",
+    tagline: "End-to-end ML pipeline for multi-class sentiment classification — 89% test accuracy, sub-100ms serving.",
+    description:
+      "A production-style ML system: reproducible training with versioned data and tracked " +
+      "experiments, deployed as a containerized inference service with caching.",
+    tags: ["Python", "PyTorch", "Hugging Face", "FastAPI", "Docker", "Redis", "AI/ML"],
+    status: "Inactive",
+    featured: true,
+    links: {
+      github: "https://github.com/quinlan-dev/Neural-Sentiment-Analyzer",
+      demo: "",
+      writeup: ""
+    },
+    highlights: [
+      "89% accuracy on the held-out test set using PyTorch and Hugging Face Transformers",
+      "Reproducible preprocessing, training, and evaluation workflows following MLOps practices",
+      "Containerized FastAPI service with a Redis caching layer serving sub-100ms inference latency under load testing"
     ]
   }
 ];
@@ -162,7 +175,7 @@ const EXPERIENCE = [
 const EDUCATION = [
   {
     school: "University of California, Santa Cruz",
-    degree: "M.S. in Computer Science",
+    degree: "M.S. in Computer Science · Graduating December 2026",
     period: "September 2025 – Present",
     detail:
       "Relevant courses: Analysis of Algorithms, Computer Architecture, LLMs, Machine Learning, " +
